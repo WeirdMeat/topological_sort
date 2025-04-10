@@ -26,7 +26,7 @@ func KahnsAlgo(adj [][]int) ([]int, error) {
 	}
 
 	var l []int
-	var s []int
+	s := make(map[int]bool)
 	for vv := 0; vv < len(adj); vv++ {
 		ishead := true
 		for v := 0; v < len(adj); v++ {
@@ -36,13 +36,13 @@ func KahnsAlgo(adj [][]int) ([]int, error) {
 			}
 		}
 		if ishead {
-			s = append(s, vv)
+			s[vv] = true
 		}
 	}
 
 	for len(s) > 0 {
-		n := s[len(s)-1]
-		s = s[:len(s)-1]
+		n := GetRandomFromMap(s)
+		delete(s, n)
 		l = append(l, n)
 		var m []int
 		var prev *EdgeNode
@@ -69,7 +69,7 @@ func KahnsAlgo(adj [][]int) ([]int, error) {
 				}
 			}
 			if new_head {
-				s = append(s, m_vertex)
+				s[m_vertex] = true
 			}
 		}
 		clear(m)

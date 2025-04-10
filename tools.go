@@ -21,3 +21,10 @@ func CheckSorted(adj [][]int, sorted []int) (bool, error) {
 	}
 	return true, nil
 }
+
+func GetRandomFromMap(m map[int]bool) int {
+	for k := range m {
+		return k
+	}
+	return -1
+}
